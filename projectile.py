@@ -14,7 +14,6 @@ angle=30
 
 g=9.8
 t=0  
-tmax=10
 
 theta=math.radians(angle)   #angle in radians
 
