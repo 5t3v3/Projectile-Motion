@@ -126,10 +126,11 @@ while y0[p]>=0:
 print("Maximum range with drag is ",x[-1])
 print("Maximum range without drag is ",x0[-1])
 
-
+plt.title("Projectile motion")
 plt.plot(x,y,'r-',label='With drag')
 plt.plot(x0,y0,'b-',label='without drag')
 plt.grid()
+plt.legend()
 plt.ylabel("Y axis")
 plt.xlabel("X axis")
 plt.show()
