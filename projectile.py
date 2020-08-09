@@ -15,6 +15,7 @@ angle=30
 g=9.8
 t=0  
 
+
 theta=math.radians(angle)   #angle in radians
 
 vy=[v0*math.sin(theta)] 
@@ -122,15 +123,21 @@ while y0[p]>=0:
     
 
 ####### Graph
+
+print("\nWith drag stats:")
 print("Maximum range with drag is ",x[-1])
+print("Total time of flight ",t,"s")
+
+print("\nWithout drag stats")
 print("Maximum range without drag is ",x0[-1])
+print("Total time of flight without drag",t0,"s")
 
 plt.title("Projectile motion")
 plt.plot(x,y,'r-',label='With drag')
 plt.plot(x0,y0,'b-',label='without drag')
 plt.grid()
 plt.legend()
-plt.ylabel("Y axis")
-plt.xlabel("X axis")
+plt.ylabel("Y Coordinate")
+plt.xlabel("X Coordinate")
 plt.show()
 
