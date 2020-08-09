@@ -1,8 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 
-
-##### Input all the terms, mass,c,ro,area,g,initial velocity
+## Input all the terms, mass,c,ro,area,g,initial velocity
 ro=1.225
 c=0.5
 r=0.0366
@@ -11,130 +10,82 @@ mass=0.145
 dt=0.001     #time interval
 v0=50
 angle=30
-
 g=9.8
-t=0  
-
 
 theta=math.radians(angle)   #angle in radians
 
-vy=[v0*math.sin(theta)] 
-vx=[v0*math.cos(theta)]
 
-
-x=[0]#initial coordinates
-y=[0]#initial y cordinate
-
-
-# functions
-def v(v_x,v_y):
-    v=math.sqrt(v_x**2+v_y**2)
+def vel(vx,vy): #velocity
+    v=math.sqrt(vx**2+vy**2)
     return v
 
-def DE(ro,area):       # drag 
+def DE(ro,area):   # drag 
     DD=float((ro*area*c)/2)
     return DD
 
-p=0
+#projectile motion
+# tr is for drag and without drag
+# tr=0 for projectile without drag
+# tr=1 for projectile with drag
 
-accel_x=[]
-accel_y=[]
-#-----------------------------------------------------------------------------------------------------------#
-# with drag #
-
-while y[p]>=0:
+def projectile(v0,ro,area,tr):
+    t=0
+    p=0
+    x=[0]
+    y=[0]
+    accel_x=[]
+    accel_y=[]
     
-    D=DE(ro,area)  # D in eqn
+    vy=[v0*math.sin(theta)] 
+    vx=[v0*math.cos(theta)]
+
+    while y[p]>=0:
+        D = tr*DE(ro,area)  # D in eqn
+        
+        vxx=float(vx[p]) 
+        vyy=float(vy[p]) 
+        v=vel(vxx,vyy)
+
+        ay=-g-((D/mass)*vyy*v)
+        ax=-(D/mass)*vxx*v  
+
+        accel_x.append(ax)
+        accel_y.append(ay)
+
+        delta_x=(vxx*dt)+(accel_x[p]*(dt**2)/2) 
+        delta_y=(vyy*dt)+(accel_y[p]*(dt**2)/2)
+        
+        
+        vx.append(vxx+((accel_x[p])*dt))
+        vy.append(vyy+((accel_y[p])*dt))
+
+
+        x.append(x[p]+delta_x) 
+        y.append(y[p]+delta_y) 
+
+        t=t+dt
+        p=p+1
     
-    vxx=float(vx[p]) # x coponent of velocity at pth position in list
-    vyy=float(vy[p]) # y component of velocity at pth position in list
-    vv=v(vxx,vyy)
-    ayy=-g-((D/mass)*vyy*vv) #acceleration y component
-    axx=-(D/mass)*vxx*vv   #acceleration x component
+    return x, y, t
 
-    accel_x.append(axx) #acceleration in x direction
-    accel_y.append(ayy)    #acceleration in y direction
+#######################################
 
-    delta_x=(vxx*dt)+(accel_x[p]*(dt**2)/2)  # dx
-    delta_y=(vyy*dt)+(accel_y[p]*(dt**2)/2)   #dy
-    
+x1, y1, t1 = projectile(v0,ro,area,1)
+x2, y2, t2 = projectile(v0,ro,area,0)
 
-    accelxx=accel_x[p]
-    accelyy=accel_y[p]
-    
-    
-    vx.append(vxx+(accelxx*dt) )# vx + delta vx
-    vy.append(vyy+(accelyy*dt)) #  vy + delta vy
-
-
-    x.append(x[p]+delta_x) #adding the value of x to list
-    y.append(y[p]+delta_y) #adding the value of y to list
-
-    t=t+dt
-    p=p+1
-
-
-##########for d=0
-#  without drag
-#--------------------------------------------------------------------------------------------------------------------#
-
-x0=[0]
-y0=[0]
-
-t0=0
-accel_x0=[]
-accel_y0=[]
-
-vy0=[v0*math.sin(theta)] 
-vx0=[v0*math.cos(theta)]
-
-p=0
-
-while y0[p]>=0:
-    
-    d=0  # D in eqn
-    
-    vxx=float(vx0[p]) # x coponent of velocity at pth position in list
-    vyy=float(vy0[p]) # y component of velocity at pth position in list
-    vo=math.sqrt(vxx**2+vyy**2)
-    ayy=-g-((d/mass)*vyy*vo) #acceleration y component
-    axx=-(d/mass)*vxx*vo   #acceleration x component
-
-    accel_x0.append(axx) #acceleration in x direction
-    accel_y0.append(ayy)    #acceleration in y direction
-
-    delta_x=(vxx*dt)+(accel_x0[p]*(dt**2)/2)  # dx
-    delta_y=(vyy*dt)+(accel_y0[p]*(dt**2)/2)   #dy
-    
-
-    accelxx=accel_x0[p]
-    accelyy=accel_y0[p]
-    
-    
-    vx0.append(vxx+(accelxx*dt) )# vx + delta vx
-    vy0.append(vyy+(accelyy*dt)) #  vy + delta vy
-
-
-    x0.append(x0[p]+delta_x) #adding the value of x to list
-    y0.append(y0[p]+delta_y) #adding the value of y to list
-
-    t0=t0+dt
-    p=p+1
-    
-
-####### Graph
+#############   Graph  ################
 
 print("\nWith drag stats:")
-print("Maximum range with drag is ",x[-1])
-print("Total time of flight ",t,"s")
+print("Range with drag is ",round(x1[-1],2))
+print("Total time of flight ",round(t1,2),"s")
 
 print("\nWithout drag stats")
-print("Maximum range without drag is ",x0[-1])
-print("Total time of flight without drag",t0,"s")
+print("Range without drag is ",round(x2[-1],2))
+print("Total time of flight without drag",round(t2,2),"s")
 
 plt.title("Projectile motion")
-plt.plot(x,y,'r-',label='With drag')
-plt.plot(x0,y0,'b-',label='without drag')
+plt.plot(x1,y1,'r-',label='With drag')
+plt.plot(x2,y2,'b-',label='without drag')
 plt.grid()
 plt.legend()
 plt.ylabel("Y Coordinate")
