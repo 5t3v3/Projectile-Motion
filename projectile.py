@@ -1,7 +1,13 @@
+# Written by Abhijith A
+# Date of Last Modification:  09/08/2020
+# Program to understand the difference between projectile motion with and without air drag
+
+#/bin/python
+
 import math
 import matplotlib.pyplot as plt
 
-## Input all the terms, mass,c,ro,area,g,initial velocity
+## Input all the parameters { mass , c , ro(air density) , g , initial velocity v0 }
 ro=1.225
 c=0.5
 r=0.0366
