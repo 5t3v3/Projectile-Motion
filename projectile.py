@@ -14,7 +14,6 @@ g=9.8
 
 theta=math.radians(angle)   #angle in radians
 
-
 def vel(vx,vy): #velocity
     v=math.sqrt(vx**2+vy**2)
     return v
@@ -55,10 +54,8 @@ def projectile(v0,ro,area,tr):
         delta_x=(vxx*dt)+(accel_x[p]*(dt**2)/2) 
         delta_y=(vyy*dt)+(accel_y[p]*(dt**2)/2)
         
-        
         vx.append(vxx+((accel_x[p])*dt))
         vy.append(vyy+((accel_y[p])*dt))
-
 
         x.append(x[p]+delta_x) 
         y.append(y[p]+delta_y) 
@@ -74,21 +71,23 @@ x1, y1, t1 = projectile(v0,ro,area,1)
 x2, y2, t2 = projectile(v0,ro,area,0)
 
 #############   Graph  ################
+try: 
+    print("\nWith drag stats:")
+    print("Range with drag is ",round(x1[-1],2))
+    print("Total time of flight ",round(t1,2),"s")
 
-print("\nWith drag stats:")
-print("Range with drag is ",round(x1[-1],2))
-print("Total time of flight ",round(t1,2),"s")
+    print("\nWithout drag stats")
+    print("Range without drag is ",round(x2[-1],2))
+    print("Total time of flight without drag",round(t2,2),"s")
 
-print("\nWithout drag stats")
-print("Range without drag is ",round(x2[-1],2))
-print("Total time of flight without drag",round(t2,2),"s")
+    plt.title("Projectile motion")
+    plt.plot(x1,y1,'r-',label='With drag')
+    plt.plot(x2,y2,'b-',label='without drag')
+    plt.grid()
+    plt.legend()
+    plt.ylabel("Y Coordinate")
+    plt.xlabel("X Coordinate")
+    plt.show()
 
-plt.title("Projectile motion")
-plt.plot(x1,y1,'r-',label='With drag')
-plt.plot(x2,y2,'b-',label='without drag')
-plt.grid()
-plt.legend()
-plt.ylabel("Y Coordinate")
-plt.xlabel("X Coordinate")
-plt.show()
-
+except: 
+    print("Check the inputs and Try again!!!!")
