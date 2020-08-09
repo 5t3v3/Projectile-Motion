@@ -1,2 +1,5 @@
 # Projectile-Motion
-This is a python program to compare the difference between  a projectile motion under air drag and without air drag.
+# PHYSICS MINI_PROJECT
+
+Python program to plot and compare a projectile motion under air drag and without air drag.
+
