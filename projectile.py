@@ -8,18 +8,20 @@ import math
 import matplotlib.pyplot as plt
 
 ## Input all the parameters { mass , c , ro(air density) , g , initial velocity v0 }
+
 ro=1.225
 c=0.5
 r=0.0366
 area=(math.pi*r*r)
-mass=0.145
+mass=int(input("enter the mass of the objet"))
 dt=0.001     #time interval
 v0=50
-angle=30
-g=9.8
+angle=int(input("enter the angle"))
+g=9.8        #gravati constant
 
 theta=math.radians(angle)   #angle in radians
 
+#fn to calculate the velocity
 def vel(vx,vy): #velocity
     v=math.sqrt(vx**2+vy**2)
     return v
