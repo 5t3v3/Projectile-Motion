@@ -1,6 +1,5 @@
 # Projectile-Motion 
 
-<h2><u>PHYSICS MINI PROJECT TO FIND THE DRAG</u></h2>
 
 <h3>Python program to plot and compare a projectile motion under air drag and without air drag.</h3>
 <pre>
