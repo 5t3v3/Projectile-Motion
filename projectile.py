@@ -1,5 +1,5 @@
 # Written by Abhijith A
-# Date of Last Modification:  09/08/2020
+# Date of Last Modification:  29/10/2020
 # Program to understand the difference between projectile motion with and without air drag
 
 #/bin/python
@@ -7,17 +7,17 @@
 import math
 import matplotlib.pyplot as plt
 
-## Input all the parameters { mass , c , ro(air density) , g , initial velocity v0 }
+#parameters = { mass , c , ro(air density) , g , initial velocity v0 }
 
 ro=1.225
 c=0.5
 r=0.0366
 area=(math.pi*r*r)
-mass=int(input("enter the mass of the objet"))
+mass=0.145
 dt=0.001     #time interval
 v0=50
-angle=int(input("enter the angle"))
-g=9.8        #gravati constant
+angle=30
+g=9.8        
 
 theta=math.radians(angle)   #angle in radians
 
@@ -31,7 +31,7 @@ def DE(ro,area):   # drag
     return DD
 
 #projectile motion
-# tr is for drag and without drag
+
 # tr=0 for projectile without drag
 # tr=1 for projectile with drag
 
