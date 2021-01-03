@@ -2,7 +2,6 @@
 # Date of Last Modification:  29/10/2020
 # Program to understand the difference between projectile motion with and without air drag
 
-#/bin/python
 
 import math
 import matplotlib.pyplot as plt
